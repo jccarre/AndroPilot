@@ -1,7 +1,8 @@
 #include <Servo.h>
-#include <Wire.h> //TODO : à enlever après. C'est uniquement pour les essais.
 #include "comm_i2C.h"
 //inspiré de http://android-er.blogspot.com/2014/09/bi-directional-communication-between_24.html
+
+const boolean debug = false;
 
 int pinLED = 13;
 
@@ -32,8 +33,10 @@ const uint8_t posMaxServos[4] = {150, 150, 150, 150};  //Angles maximum de chacu
 
 
 void setup() {
-  Wire.begin(); //TODO : à enlever après. C'est uniquement pour les essais.
-  envoyer_arduino_micro("Bonjour !");
+  if(debug){
+    Wire.begin(); //TODO : à enlever après. C'est uniquement pour les essais.
+    envoyer_arduino_micro("Bonjour !");
+  }
   Serial.begin(9600);
   for(int i=0; i<4; i++){
     pinMode(servoPins[i], OUTPUT);
@@ -69,16 +72,6 @@ void loop() {
   }
   //si le tableau data contient autre chose que des zéros, c'est qu'il y a un ordre à exécuter.
   if(data[0] != 0){
-    envoyer_arduino_micro("reçu : ");
-    char x[4];
-    itoa(data[0], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[1], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[2], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[3], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
     
     int commandesServos[4];
     for(int i=0; i<4; i++){
@@ -86,16 +79,29 @@ void loop() {
       servos[i].write(commandesServos[i]);
       data[i] = 0;
     }
-    envoyer_arduino_micro("J'envoie : ");
-    itoa(commandesServos[0], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(commandesServos[1], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(commandesServos[2], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(commandesServos[3], x, DEC);
-    envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");   
-    envoyer_arduino_micro("\n");
+    
+    if(debug){
+      envoyer_arduino_micro("reçu : ");
+      char x[4];
+      itoa(data[0], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(data[1], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(data[2], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(data[3], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      envoyer_arduino_micro("J'envoie : ");
+      itoa(commandesServos[0], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(commandesServos[1], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(commandesServos[2], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
+      itoa(commandesServos[3], x, DEC);
+      envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");   
+      envoyer_arduino_micro("\n");
+    }
   }
 }
 
