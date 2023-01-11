@@ -13,9 +13,9 @@ public class Vol {
     private static float consigneInclinaison = 0.0f; //Par défaut, on va tout droit
     private static float consigneAssiette = -10.0f; //Le drone doit descendre un peu pour se maintenir en vol.
 
-    private static float Kp_incli = 3.0f; //Gain proportionnel pour l'asservissement de l'inclinaison
+    private static float Kp_incli = 4.0f; //Gain proportionnel pour l'asservissement de l'inclinaison
     private static float Kd_incli = 1.0f; //Gain dérivé        pour l'asservissement de l'inclinaison
-    private static float Kp_assiette = 1.0f;       //Gain proportionnel pour l'asservissement de la pente
+    private static float Kp_assiette = 4.0f;       //Gain proportionnel pour l'asservissement de la pente
     private static float Kd_assiette = 1.0f;       //Gain dérivé        pour l'asservissement de la pente
 
     public static byte[] calculerCommandesServos(){

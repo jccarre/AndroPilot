@@ -87,6 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/boutonReinitialiersAngles"
-        android:text="RéinitialiserAngles"/>
+        android:text="Réinitialiser Angles"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"/>
 
 </LinearLayout>

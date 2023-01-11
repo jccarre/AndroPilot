@@ -71,18 +71,18 @@ void loop() {
   if(data[0] != 0){
     envoyer_arduino_micro("reçu : ");
     char x[4];
-    itoa(data[0] - 127, x, DEC);
+    itoa(data[0], x, DEC);
     envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[1] - 127, x, DEC);
+    itoa(data[1], x, DEC);
     envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[2] - 127, x, DEC);
+    itoa(data[2], x, DEC);
     envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
-    itoa(data[3] - 127, x, DEC);
+    itoa(data[3], x, DEC);
     envoyer_arduino_micro(x); envoyer_arduino_micro(" | ");
     
     int commandesServos[4];
     for(int i=0; i<4; i++){
-      commandesServos[i] = map(data[i], -126, 127, posMinServos[i], posMaxServos[i]);     // scale it for use with the servo (value between 0 and 180)
+      commandesServos[i] = map(data[i], 0, 254, posMinServos[i], posMaxServos[i]);     // scale it for use with the servo (value between 0 and 180)
       servos[i].write(commandesServos[i]);
       data[i] = 0;
     }
