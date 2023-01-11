@@ -1,0 +1,13 @@
+L'Arduino doit être branché au téléphone Android via un cable USB OTG.
+Il faut uploader le croquis "communication_bidirectionnelle_arduino.ino".
+
+L'arduino sera alors Alimenté par le téléphone et ne nécessite pas de batterie.
+Le servo de l'aileron gauche doit être branché sur la pin 3.
+Le servo de l'aileron droit doit être branché sur la pin 5.
+Le servo de la gouverne de profondeur doit être branché sur la pin 6.
+
+
+Pour aider au débug, un deuxième croquis est proposé. Il se trouve dans le dossier "slave_receiver".
+L'arduino principal étant branché en USB au téléphone, on ne peut plus utiliser le port série pour suivre son état. 
+Il est donc proposé, pour des opération de débug, de brancher un deuxième Arduino (que nous nommerons esclave) en I2C, au premier.
+L'Arduino principal enverra ses information en I2C à l'esclave, et l'esclave les transmettra à son tour, via son port série sur USB, à un PC.
